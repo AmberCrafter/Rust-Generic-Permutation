@@ -36,7 +36,7 @@ impl Solution {
         let mut flag = true;
         for i in 1..nums_len{
             // println!("Step1: i:{:?}\tx:{:?}\ty:{:?}", i, nums[nums_len-i], nums[nums_len-i-1]);
-            if nums[nums_len-i]>=nums[nums_len-i-1] {
+            if nums[nums_len-i]>nums[nums_len-i-1] {
                 dp = nums_len-i-1;
                 flag = false;
                 break;
@@ -54,17 +54,17 @@ impl Solution {
         }
         // println!("Step2: {:?}", nums);
 
-        println!("dp: {}", dp);
+        // println!("dp: {}", dp);
         // step 3: reverse the last parts of the list after dp
         for i in 1..=(nums_len-dp)/2 {
             nums.swap(nums_len-i, dp+i);
-            println!("Step3: {:?}", nums);
+            // println!("Step3: {:?}", nums);
         }
         nums
     }
 
 
-    pub fn permute(nums: Vec<i32>) -> Vec<Vec<i32>> {
+    pub fn permute_unique(nums: Vec<i32>) -> Vec<Vec<i32>> {
         let mut results: Vec<Vec<i32>> = Vec::new();
         results.push(nums);
 
@@ -88,8 +88,10 @@ mod tests {
 
     #[test]
     fn permute_one() {
-        let nums = vec![3,2,1];
+        let nums = vec![1,1,2,2];
         let result = Solution::permute_one(&nums);
+        println!("result: {:?}", result);
+        let result = Solution::permute_one(&result);
         println!("result: {:?}", result);
         let result = Solution::permute_one(&result);
         println!("result: {:?}", result);
